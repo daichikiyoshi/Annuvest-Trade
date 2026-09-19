@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Annuvest Trade</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">Annuvest<span>Trade</span></div>
+  <div class="practice">PRACTICE MODE • VIRTUAL MONEY</div>
+</header>
+
+<main class="layout">
+  <aside class="sidebar">
+    <h3>Marketplace</h3>
+    <button class="asset-button active" onclick="selectAsset('VAL', this)"><span>VALORANT</span><b>VAL</b></button>
+    <button class="asset-button" onclick="selectAsset('RBLX', this)"><span>Roblox</span><b>RBLX</b></button>
+    <button class="asset-button" onclick="selectAsset('MC', this)"><span>Minecraft</span><b>MC</b></button>
+    <button class="asset-button" onclick="selectAsset('COD', this)"><span>Call of Duty</span><b>COD</b></button>
+    <button class="asset-button" onclick="selectAsset('ML', this)"><span>Mobile Legends</span><b>ML</b></button>
+  </aside>
+
+  <section class="content">
+    <section class="card market-card">
+      <div class="market-heading">
+        <div>
+          <span id="assetSymbol" class="symbol">VAL</span>
+          <span id="currentPrice" class="price">$185.20</span>
+          <span id="priceChange" class="positive">+0.00%</span>
+        </div>
+        <div class="status">Market Open</div>
+      </div>
+
+      <div class="time-buttons">
+        <button class="time-button active" onclick="selectTimeFrame('1m', this)">1m</button>
+        <button class="time-button" onclick="selectTimeFrame('5m', this)">5m</button>
+        <button class="time-button" onclick="selectTimeFrame('15m', this)">15m</button>
+        <button class="time-button" onclick="selectTimeFrame('1h', this)">1h</button>
+        <button class="time-button" onclick="selectTimeFrame('1d', this)">1d</button>
+      </div>
+
+      <canvas id="priceChart"></canvas>
+
+      <div class="market-stats">
+        <div><span>Open</span><strong id="openPrice">$185.20</strong></div>
+        <div><span>High</span><strong id="highPrice">$185.20</strong></div>
+        <div><span>Low</span><strong id="lowPrice">$185.20</strong></div>
+        <div><span>Volume</span><strong id="tradingVolume">0</strong></div>
+      </div>
+    </section>
+
+    <section class="card history-card">
+      <div class="section-title">
+        <h3>Trade History</h3>
+        <button onclick="clearTradeHistory()" class="small-button">Clear</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Time</th><th>Asset</th><th>Side</th><th>Qty</th><th>Price</th><th>P/L</th></tr></thead>
+          <tbody id="tradeHistory"><tr><td colspan="6">No trades yet</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+  </section>
+
+  <aside class="right-panel">
+    <section class="card balance-card">
+      <span>Remaining Balance</span>
+      <strong id="cashBalance">$10,000.00</strong>
+    </section>
+
+    <section class="card order-card">
+      <h3>Place Order</h3>
+      <label for="assetSelect">Asset</label>
+      <select id="assetSelect" onchange="selectAssetFromMenu(this.value)">
+        <option value="VAL">VAL</option><option value="RBLX">RBLX</option>
+        <option value="MC">MC</option><option value="COD">COD</option><option value="ML">ML</option>
+      </select>
+
+      <label for="quantityInput">Quantity</label>
+      <input id="quantityInput" type="number" min="1" value="1">
+
+      <label for="orderType">Order Type</label>
+      <select id="orderType"><option>Market</option><option>Limit (simulation)</option></select>
+
+      <div class="trade-buttons">
+        <button class="buy-button" onclick="placeOrder('BUY')">BUY</button>
+        <button class="sell-button" onclick="placeOrder('SELL')">SELL</button>
+      </div>
+      <div id="notification" class="notification"></div>
+    </section>
+
+    <section class="card position-card">
+      <h3>Current Position</h3>
+      <div class="position-row"><span>Shares</span><strong id="shareCount">0</strong></div>
+      <div class="position-row"><span>Average Price</span><strong id="averagePrice">$0.00</strong></div>
+      <div class="position-row"><span>Market Value</span><strong id="marketValue">$0.00</strong></div>
+      <div class="position-row"><span>Unrealized P/L</span><strong id="unrealizedProfitLoss">$0.00</strong></div>
+    </section>
+  </aside>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
